@@ -1,8 +1,8 @@
 #include "amiitool.h"
 #include "amiibo.h"
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <unistd.h>
 
 #define COMMAND_SIZE 1000
@@ -91,7 +91,7 @@ void Amiitool::redirectIO() {
   }
 }
 
-void Amiitool::resetIO() {
+void Amiitool::resetIO() const {
   if (dup2(savedStdin, 0) < 0) {
     fprintf(stderr, "Could not reset stdin\n");
     exit(1);
