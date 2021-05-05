@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <author/>
-    <comment/>
-    <exportmacro/>
     <class>mainwindow</class>
     <widget class="QWidget" name="mainwindow">
         <property name="geometry">
@@ -14,9 +11,41 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>mainwindow</string>
+            <string>AmiiboTap</string>
         </property>
+        <widget class="QPushButton" name="pushButton">
+            <property name="geometry">
+                <rect>
+                    <x>320</x>
+                    <y>270</y>
+                    <width>75</width>
+                    <height>23</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>PushButton</string>
+            </property>
+        </widget>
+        <widget class="QWidget" name="verticalLayoutWidget">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>381</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <widget class="QLabel" name="label">
+                        <property name="text">
+                            <string>TextLabel</string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
     </widget>
-    <pixmapfunction/>
+    <resources/>
     <connections/>
 </ui>

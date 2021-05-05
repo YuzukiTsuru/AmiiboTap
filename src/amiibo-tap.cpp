@@ -1,21 +1,27 @@
+#include <iostream>
+#include <QWidget>
+#include <QApplication>
+
 #include "amiibo.h"
 #include "amiitool.h"
 
-#include <cstdio>
+#include "mainwindow.h"
 
 void printUsage() {
-    printf("pimiibo keyfile binfile\n");
+    std::cout << "AmiiboTap keyfile binfile" << std::endl;
 }
 
 int main(int argc, char **argv) {
     if (argc != 3) {
-        fprintf(stderr, "Incorrect number of arguments\n");
+        std::cerr << "Incorrect number of arguments, to the GUI Interface" << std::endl;
         printUsage();
-        exit(1);
+    } else {
+        Amiitool::setKeyPath(argv[1]);
+        Amiibo amiibo(argv[2]);
     }
 
-    Amiitool::setKeyPath(argv[1]);
-
-    Amiibo amiibo(argv[2]);
-
+    QApplication amiibo_tap(argc, argv);
+    mainwindow _mainwindow;
+    _mainwindow.show();
+    return QApplication::exec();
 }
