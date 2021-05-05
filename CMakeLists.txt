@@ -3,7 +3,7 @@ project(AmiiboTap)
 
 add_subdirectory(lib/amiitool)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -19,7 +19,8 @@ add_executable(${PROJECT_NAME}
         src/mainwindow.cpp
         src/mainwindow.h
         src/mainwindow.ui
-        )
+        src/PN532Tool.cpp
+        src/PN532Tool.h)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "

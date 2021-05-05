@@ -8,7 +8,7 @@
 #define COMMAND_SIZE 1000
 
 Amiitool *Amiitool::_shared = nullptr;
-const char *Amiitool::_keyPath = NULL;
+const char *Amiitool::_keyPath = nullptr;
 
 Amiitool *Amiitool::shared() {
     if (!_shared) { _shared = new Amiitool(); }
