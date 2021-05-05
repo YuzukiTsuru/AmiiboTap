@@ -1,5 +1,4 @@
-#include <cstdlib>
-#include <cstdint>
+#include <iostream>
 
 class Amiitool {
 public:

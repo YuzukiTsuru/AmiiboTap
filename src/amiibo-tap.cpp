@@ -1,8 +1,7 @@
 #include "amiibo.h"
 #include "amiitool.h"
-#include "nfchandler.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 void printUsage() {
     printf("pimiibo keyfile binfile\n");
@@ -17,8 +16,6 @@ int main(int argc, char **argv) {
 
     Amiitool::setKeyPath(argv[1]);
 
-    Amiibo *amiibo = new Amiibo(argv[2]);
-    NFCHandler *nfc = new NFCHandler();
+    Amiibo amiibo(argv[2]);
 
-    nfc->writeAmiibo(amiibo);
 }

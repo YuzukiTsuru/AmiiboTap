@@ -13,7 +13,7 @@ Amiibo::Amiibo(const char *filePath) {
     Amiitool::shared()->decryptBuffer(encryptedBuffer, buffer);
 }
 
-void Amiibo::setUUID(const uint8_t *uuid) {
+[[maybe_unused]] void Amiibo::setUUID(const uint8_t *uuid) {
     printf("\nUpdating bin for new UID:\n");
 
     // Credit: https://gist.githubusercontent.com/ShoGinn/d27a726296f4370bbff0f9b1a7847b85/raw/aeb425e8b1708e1c61f78c3e861dad03c20ca8ab/Arduino_amiibo_tool.bash
