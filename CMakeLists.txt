@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(AmiiboTap)
 
-add_subdirectory(lib/amiitool)
+#add_subdirectory(lib/amiitool)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
@@ -14,8 +14,6 @@ set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
 
 add_executable(${PROJECT_NAME}
         src/amiibo-tap.cpp
-        src/amiibo.cpp
-        src/amiitool.cpp
         src/mainwindow.cpp
         src/mainwindow.h
         src/mainwindow.ui

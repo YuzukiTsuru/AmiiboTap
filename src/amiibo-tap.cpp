@@ -2,9 +2,6 @@
 #include <QWidget>
 #include <QApplication>
 
-#include "amiibo.h"
-#include "amiitool.h"
-
 #include "mainwindow.h"
 
 void printUsage() {
@@ -16,8 +13,7 @@ int main(int argc, char **argv) {
         std::cerr << "Incorrect number of arguments, to the GUI Interface" << std::endl;
         printUsage();
     } else {
-        Amiitool::setKeyPath(argv[1]);
-        Amiibo amiibo(argv[2]);
+
     }
 
     QApplication amiibo_tap(argc, argv);
