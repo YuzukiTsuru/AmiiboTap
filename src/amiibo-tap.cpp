@@ -2,6 +2,8 @@
 #include <QWidget>
 #include <QApplication>
 
+#include <nfc/nfc.h>
+
 #include "mainwindow.h"
 
 void printUsage() {
