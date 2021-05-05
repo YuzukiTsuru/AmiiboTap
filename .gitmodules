@@ -1,3 +1,6 @@
-[submodule "amiitool"]
-	path = amiitool
-	url = https://github.com/socram8888/amiitool.git
+[submodule "lib/amiitool/amiitool-src"]
+	path = lib/amiitool/amiitool-src
+	url = https://github.com/socram8888/amiitool/
+[submodule "lib/amiitool/mbedtls"]
+	path = lib/amiitool/mbedtls
+	url = https://github.com/ARMmbed/mbedtls
