@@ -2,35 +2,37 @@ cmake_minimum_required(VERSION 3.19)
 project(AmiiboTap)
 
 add_subdirectory(lib/amiitool)
-add_subdirectory(lib/libnfc)
 
-include_directories(lib/libnfc/include)
+set(QT_VERSION 5)
+set(REQUIRED_LIBS Core Gui Widgets SerialPort)
+set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
 
+find_package(libnfc REQUIRED)
+find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
+
+add_definitions(${LIBNFC_DEFINITIONS})
+include_directories(${LIBNFC_INCLUDE_DIRS})
+link_directories(${LIBNFC_LIBRARY_DIRS})
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(QT_VERSION 5)
-set(REQUIRED_LIBS Core Gui Widgets SerialPort)
-set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
-
-add_executable(${PROJECT_NAME}
-        src/amiibo-tap.cpp
-        src/mainwindow.cpp
-        src/mainwindow.h
-        src/mainwindow.ui
-        src/PN532Tool.cpp
-        src/PN532Tool.h)
-
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "
             "(-DCMAKE_PREFIX_PATH=\"path/to/Qt/lib/cmake\" or -DCMAKE_PREFIX_PATH=/usr/include/{host}/qt{version}/ on Ubuntu)")
 endif ()
 
-find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
-target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})
+add_executable(${PROJECT_NAME}
+        src/amiitool.cpp
+        src/amiibo.cpp
+        src/nfchandler.cpp
+        src/pimiibo.cpp
+        )
+target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} nfc)
+
+
 if (WIN32)
     set(DEBUG_SUFFIX)
     if (CMAKE_BUILD_TYPE MATCHES "Debug")
