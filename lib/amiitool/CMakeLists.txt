@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.8)
 project(amiibo)
 
 include_directories(
-        PUBLIC mbedtls/include/
-        amiitool-src/include/
+        PUBLIC mbedtls/include
+        amiitool-src/include
 )
+
 add_subdirectory(mbedtls)
 
 add_library(amiibo
@@ -16,4 +17,8 @@ add_library(amiibo
 if (MSVC)
     target_compile_options(amiibo PRIVATE "/wd4996")
 endif (MSVC)
+
 target_link_libraries(amiibo mbedtls)
+
+add_executable(amiitool amiitool.c)
+target_link_libraries(amiitool amiibo)
