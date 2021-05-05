@@ -4,3 +4,6 @@
 [submodule "lib/amiitool/mbedtls"]
 	path = lib/amiitool/mbedtls
 	url = https://github.com/ARMmbed/mbedtls
+[submodule "lib/libnfc/libnfc"]
+	path = lib/libnfc/libnfc
+	url = https://github.com/nfc-tools/libnfc
