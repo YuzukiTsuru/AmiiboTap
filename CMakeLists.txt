@@ -3,6 +3,12 @@ project(AmiiboTap)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(lib/libnfc)
+add_subdirectory(lib/amiitool)
 
-add_executable(AmiiboTap src/amiibo-tap.cpp)
+add_executable(AmiiboTap
+        src/amiibo-tap.cpp
+        src/amiibo.cpp
+        src/amiitool.cpp
+        src/nfchandler.cpp
+        )
+target_link_libraries(AmiiboTap nfc)
