@@ -8,8 +8,8 @@
 #include "logging.h"
 
 
-const uint8_t dynamicLockBytes[4] = {0x01, 0x00, 0x0f, 0xbd};
-const uint8_t staticLockBytes[4] = {0x00, 0x00, 0x0F, 0xE0};
+const uint8_t dynamic_lock_bytes[4] = {0x01, 0x00, 0x0f, 0xbd};
+const uint8_t static_lock_bytes[4] = {0x00, 0x00, 0x0F, 0xE0};
 
 const nfc_modulation nmMifare = {
         .nmt = NMT_ISO14443A,
@@ -82,13 +82,13 @@ void NFCHandler::write_data_pages(const uint8_t *buffer) {
 
 void NFCHandler::write_dynamic_lock_bytes() {
     qInfo("Writing dynamic lock bytes...");
-    write_page(130, dynamicLockBytes);
+    write_page(130, dynamic_lock_bytes);
     qInfo("Writing dynamic lock bytes done.");
 }
 
 void NFCHandler::write_static_lock_bytes() {
     qInfo("Writing static lock bytes...");
-    write_page(2, staticLockBytes);
+    write_page(2, static_lock_bytes);
     qInfo("Writing static lock bytes done.");
 }
 
