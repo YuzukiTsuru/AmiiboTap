@@ -1,7 +1,7 @@
+#include <iostream>
+
 #include "amiibo.h"
 #include "amiitool.h"
-
-#include <stdio.h>
 
 #define UUID_OFFSET 468
 #define PASSWORD_OFFSET 532

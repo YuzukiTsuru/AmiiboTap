@@ -1,13 +1,14 @@
+#include <iostream>
+
 #include "amiitool.h"
 #include "amiibo.h"
 
-#include <stdio.h>
-#include <string.h>
+
 #include <unistd.h>
 
 #define COMMAND_SIZE 1000
 
-Amiitool *Amiitool::_shared = NULL;
+Amiitool *Amiitool::_shared = nullptr;
 const char *Amiitool::_keyPath = NULL;
 
 Amiitool *Amiitool::shared() {
@@ -21,7 +22,6 @@ void Amiitool::setKeyPath(const char *keyPath) {
 }
 
 Amiitool::Amiitool() {
-
     savedStdin = dup(0);
     savedStdout = dup(1);
 }
@@ -87,7 +87,7 @@ void Amiitool::resetIO() {
         fprintf(stderr, "Could not reset stdin\n");
         exit(1);
     }
-
+˚
     if (dup2(savedStdout, 1) < 0) {
         fprintf(stderr, "Could not reset stdout\n");
         exit(1);

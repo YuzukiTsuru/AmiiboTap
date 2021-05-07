@@ -16,8 +16,8 @@ public:
     void printHex(const uint8_t *buffer, const size_t size);
 
 private:
-    int writePipe[2];
-    int readPipe[2];
+    int writePipe[2]{};
+    int readPipe[2]{};
     int savedStdin;
     int savedStdout;
 

@@ -9,12 +9,12 @@ public:
 
     void setUUID(const uint8_t uuid[]);
 
-    uint8_t encryptedBuffer[AMIIBO_SIZE];
+    uint8_t encryptedBuffer[AMIIBO_SIZE]{};
 
 private:
-    uint8_t buffer[AMIIBO_SIZE];
+    uint8_t buffer[AMIIBO_SIZE]{};
 
-    void readFileIntoBuffer(const char *filePath, uint8_t *buffer, size_t size);
+    static void readFileIntoBuffer(const char *filePath, uint8_t *buffer, size_t size);
 
     void replaceWithUUID(const uint8_t uuid[]);
 
