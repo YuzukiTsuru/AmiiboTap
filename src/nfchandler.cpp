@@ -1,4 +1,3 @@
-#include <iostream>
 #include <nfc/nfc.h>
 
 #include "amiibo_static.h"
@@ -9,7 +8,7 @@
 
 
 const uint8_t dynamic_lock_bytes[4] = {0x01, 0x00, 0x0f, 0xbd};
-const uint8_t static_lock_bytes[4] = {0x00, 0x00, 0x0F, 0xE0};
+const uint8_t static_lock_bytes[4] = {0x00, 0x00, 0x0f, 0xe0};
 
 const nfc_modulation nmMifare = {
         .nmt = NMT_ISO14443A,
@@ -100,10 +99,9 @@ void NFCHandler::write_page(uint8_t page, const uint8_t *buffer) {
     int responseCode = nfc_initiator_transceive_bytes(device, sendData, 6, nullptr, 0, 0);
 
     if (responseCode == 0) {
-        qInfo("Done.");
+        qInfo("All Done.");
     } else {
-        qWarning("Failed > try to write the tag");
         nfc_perror(device, "Write");
-        qFatal("Write Failed");
+        qFatal("Write tag Failed");
     }
 }
