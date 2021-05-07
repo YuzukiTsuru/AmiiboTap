@@ -4,6 +4,9 @@
 #include "logging.h"
 
 int main(int argc, char **argv) {
+    // init log message handler
+    qInstallMessageHandler(logging_message);
+
     if (argc != 3 && argc != 1) {
         qFatal("Incorrect number of arguments\nUsage\n\tamiibo-tap keyfile binfile");
     }
@@ -14,7 +17,6 @@ int main(int argc, char **argv) {
     }
 
     // Amiitool::setKeyPath(argv[1]);
-    qInstallMessageHandler(logging_message);
 
     auto *amiibo = new Amiibo(argv[2]);
 
