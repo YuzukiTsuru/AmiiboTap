@@ -1,24 +1,24 @@
-#define AMIIBO_SIZE 540
-
-#include <cstdlib>
+#include <iostream>
 #include <cstdint>
+
+#include "amiibo_static.h"
 
 class Amiibo {
 public:
-    Amiibo(const char *filePath);
+    explicit Amiibo(const char *file_path);
 
-    void setUUID(const uint8_t uuid[]);
+    void set_UUID(const uint8_t *uuid);
 
-    uint8_t encryptedBuffer[AMIIBO_SIZE]{};
+    uint8_t encrypted_buffer[AMIIBO_SIZE] = {};
 
 private:
-    uint8_t buffer[AMIIBO_SIZE]{};
+    uint8_t buffer[AMIIBO_SIZE] = {};
 
-    static void readFileIntoBuffer(const char *filePath, uint8_t *buffer, size_t size);
+    static void read_file_into_buffer(const char *file_path, uint8_t *buffer, size_t size);
 
-    void replaceWithUUID(const uint8_t uuid[]);
+    void replace_with_UUID(const uint8_t *uuid);
 
-    void replacePassword(const uint8_t uuid[]);
+    void replace_password(const uint8_t *uuid);
 
-    void setDefaults(const uint8_t uuid[]);
+    void set_defaults(const uint8_t *uuid);
 };

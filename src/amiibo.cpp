@@ -2,46 +2,47 @@
 
 #include "amiibo.h"
 #include "amiitool.h"
+#include "logging.h"
 
 #define UUID_OFFSET 468
 #define PASSWORD_OFFSET 532
 #define PASSWORD_SIZE 4
 
-Amiibo::Amiibo(const char *filePath) {
-    readFileIntoBuffer(filePath, encryptedBuffer, AMIIBO_SIZE);
+Amiibo::Amiibo(const char *file_path) {
+    read_file_into_buffer(file_path, encrypted_buffer, AMIIBO_SIZE);
 
-    Amiitool::shared()->decryptBuffer(encryptedBuffer, buffer);
+    //Amiitool::shared()->decryptBuffer(encrypted_buffer, buffer);
 }
 
-void Amiibo::setUUID(const uint8_t *uuid) {
+void Amiibo::set_UUID(const uint8_t *uuid) {
     printf("\nUpdating bin for new UID:\n");
 
     // Credit: https://gist.githubusercontent.com/ShoGinn/d27a726296f4370bbff0f9b1a7847b85/raw/aeb425e8b1708e1c61f78c3e861dad03c20ca8ab/Arduino_amiibo_tool.bash
-    replaceWithUUID(uuid);
-    replacePassword(uuid);
-    setDefaults(uuid);
-    Amiitool::shared()->encryptBuffer(encryptedBuffer, buffer);
+    replace_with_UUID(uuid);
+    replace_password(uuid);
+    set_defaults(uuid);
+    //Amiitool::shared()->encryptBuffer(encrypted_buffer, buffer);
 
     printf("Finished updating bin\n\n");
 }
 
-void Amiibo::readFileIntoBuffer(const char *filePath, uint8_t *buffer, size_t size) {
-    FILE *file = fopen(filePath, "r");
+void Amiibo::read_file_into_buffer(const char *file_path, uint8_t *buffer, size_t size) {
+    FILE *file = fopen(file_path, "r");
 
     if (!file) {
-        fprintf(stderr, "Could not open %s\n", filePath);
+        fprintf(stderr, "Could not open %s\n", file_path);
         exit(1);
     }
 
     if (size != fread(buffer, 1, size, file)) {
-        fprintf(stderr, "Read incorrect number of bytes from file: %s\n", filePath);
+        fprintf(stderr, "Read incorrect number of bytes from file: %s\n", file_path);
         exit(1);
     }
 
     fclose(file);
 }
 
-void Amiibo::replaceWithUUID(const uint8_t uuid[]) {
+void Amiibo::replace_with_UUID(const uint8_t *uuid) {
     uint8_t bcc[2];
 
     printf("Replacing UID\n");
@@ -60,7 +61,7 @@ void Amiibo::replaceWithUUID(const uint8_t uuid[]) {
     }
 }
 
-void Amiibo::replacePassword(const uint8_t uuid[]) {
+void Amiibo::replace_password(const uint8_t *uuid) {
     uint8_t password[PASSWORD_SIZE] = {0, 0, 0, 0};
 
     printf("Updating password\n");
@@ -74,8 +75,8 @@ void Amiibo::replacePassword(const uint8_t uuid[]) {
     }
 }
 
-void Amiibo::setDefaults(const uint8_t uuid[]) {
-    printf("Writing magic bytes\n");
+void Amiibo::set_defaults(const uint8_t *uuid) {
+    qInfo("Writing magic bytes");
 
     // Same as bcc[1]
     buffer[0] = uuid[3] ^ uuid[4] ^ uuid[5] ^ uuid[6];

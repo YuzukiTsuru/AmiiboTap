@@ -42,7 +42,7 @@ add_executable(${PROJECT_NAME}
         src/amiibo.cpp
         src/nfchandler.cpp
         src/amibo-tap.cpp
-        )
+        src/logging.h src/logging.cpp)
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} nfc amiibo)
 
 

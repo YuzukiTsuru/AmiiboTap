@@ -9,8 +9,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <getopt.h>
-#include <stdio.h>
-#include <string.h>
 
 #define NTAG215_SIZE 540
 

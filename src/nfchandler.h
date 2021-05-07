@@ -1,7 +1,7 @@
-#include <stdlib.h>
+#include <iostream>
 #include <nfc/nfc-types.h>
 
-#define UUID_SIZE 7
+#include "amiibo_static.h"
 
 class Amiibo;
 
@@ -9,22 +9,22 @@ class NFCHandler {
 public:
     NFCHandler();
 
-    void readTagUUID(uint8_t uuidBuffer[]);
+    void read_tag_UUID(uint8_t *uuidBuffer);
 
-    void writeAmiibo(Amiibo *amiibo);
+    void write_amiibo(Amiibo *amiibo);
 
 private:
-    nfc_target target{};
-    nfc_context *context{};
-    nfc_device *device;
+    nfc_target target = {};
+    nfc_context *context = nullptr;
+    nfc_device *device = nullptr;
 
-    void writeBuffer(const uint8_t buffer[]);
+    void write_buffer(const uint8_t *buffer);
 
-    void writePage(uint8_t page, const uint8_t buffer[]);
+    void write_page(uint8_t page, const uint8_t *buffer);
 
-    void writeDataPages(const uint8_t buffer[]);
+    void write_data_pages(const uint8_t *buffer);
 
-    void writeDynamicLockBytes();
+    void write_dynamic_lock_bytes();
 
-    void writeStaticLockBytes();
+    void write_static_lock_bytes();
 };

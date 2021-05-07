@@ -1,0 +1,16 @@
+//
+// Created by Ghost Gloomy on 2021/5/7.
+//
+
+#ifndef AMIIBOTAP_AMIIBO_STATIC_H
+#define AMIIBOTAP_AMIIBO_STATIC_H
+
+#define AMIIBO_SIZE 540
+
+#define PAGE_COUNT 135
+
+#define WRITE_COMMAND 0XA2
+
+#define UUID_SIZE 7
+
+#endif //AMIIBOTAP_AMIIBO_STATIC_H
