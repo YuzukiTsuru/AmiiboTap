@@ -7,17 +7,29 @@ set(QT_VERSION 5)
 set(REQUIRED_LIBS Core Gui Widgets SerialPort)
 set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
 
-find_package(libnfc REQUIRED)
-find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
-
-add_definitions(${LIBNFC_DEFINITIONS})
-include_directories(${LIBNFC_INCLUDE_DIRS})
-link_directories(${LIBNFC_LIBRARY_DIRS})
-
 set(CMAKE_CXX_STANDARD 17)
+
+find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+
+if (CMAKE_HOST_WIN32)
+    find_package(libnfc)
+    add_definitions(${LIBNFC_DEFINITIONS})
+    include_directories(${LIBNFC_INCLUDE_DIRS})
+    link_directories(${LIBNFC_LIBRARY_DIRS})
+elseif (CMAKE_HOST_APPLE)
+    find_path(LibNFC_FIND nfc.h "/usr/local/Cellar/libnfc/1.8.0/include/" NO_SYSTEM_ENVIRONMENT_PATH)
+    if (LibNFC_FIND)
+        include_directories(/usr/local/Cellar/libnfc/1.8.0/include)
+        link_directories(/usr/local/Cellar/libnfc/1.8.0/lib)
+    else ()
+        message(FATAL_ERROR "LibNFC not found, please use 'brew install libnfc' or macport to download this required library.")
+    endif ()
+else ()
+
+endif ()
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "
