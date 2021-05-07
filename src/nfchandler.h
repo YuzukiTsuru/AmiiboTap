@@ -14,8 +14,8 @@ public:
     void writeAmiibo(Amiibo *amiibo);
 
 private:
-    nfc_target target;
-    nfc_context *context;
+    nfc_target target{};
+    nfc_context *context{};
     nfc_device *device;
 
     void writeBuffer(const uint8_t buffer[]);

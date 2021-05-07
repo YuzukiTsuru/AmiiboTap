@@ -1,10 +1,9 @@
+#include <iostream>
+#include <nfc/nfc.h>
+
 #include "nfchandler.h"
 #include "amiitool.h"
 #include "amiibo.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <nfc/nfc.h>
 
 #define PAGE_COUNT 135
 #define WRITE_COMMAND 0XA2

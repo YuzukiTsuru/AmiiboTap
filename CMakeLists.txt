@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.19)
 project(AmiiboTap)
 
+# subproject for amiitool
 add_subdirectory(lib/amiitool)
+
+set(CMAKE_CXX_STANDARD 17)
 
 set(QT_VERSION 5)
 set(REQUIRED_LIBS Core Gui Widgets SerialPort)
 set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
-
-set(CMAKE_CXX_STANDARD 17)
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 set(CMAKE_AUTOMOC ON)
@@ -28,7 +29,7 @@ elseif (CMAKE_HOST_APPLE)
         message(FATAL_ERROR "LibNFC not found, please use 'brew install libnfc' or macport to download this required library.")
     endif ()
 else ()
-
+    message("Use system libnfc")
 endif ()
 
 if (NOT CMAKE_PREFIX_PATH)
@@ -40,7 +41,7 @@ add_executable(${PROJECT_NAME}
         src/amiitool.cpp
         src/amiibo.cpp
         src/nfchandler.cpp
-        src/pimiibo.cpp
+        src/amibo-tap.cpp
         )
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} nfc)
 
