@@ -13,7 +13,6 @@ const char *Amiitool::_keyPath = NULL;
 
 Amiitool *Amiitool::shared() {
     if (!_shared) { _shared = new Amiitool(); }
-
     return _shared;
 }
 
@@ -87,7 +86,6 @@ void Amiitool::resetIO() {
         fprintf(stderr, "Could not reset stdin\n");
         exit(1);
     }
-˚
     if (dup2(savedStdout, 1) < 0) {
         fprintf(stderr, "Could not reset stdout\n");
         exit(1);

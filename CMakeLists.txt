@@ -43,7 +43,7 @@ add_executable(${PROJECT_NAME}
         src/nfchandler.cpp
         src/amibo-tap.cpp
         )
-target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} nfc)
+target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} nfc amiibo)
 
 
 if (WIN32)

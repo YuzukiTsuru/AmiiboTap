@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <getopt.h>
+#include <stdio.h>
+#include <string.h>
 
 #define NTAG215_SIZE 540
 
@@ -77,6 +79,7 @@ int main(int argc, char **argv) {
     }
 
     nfc3d_amiibo_keys amiiboKeys;
+    int errno = 0;
     if (!nfc3d_amiibo_load_keys(&amiiboKeys, keyfile)) {
         fprintf(stderr, "Could not load keys from \"%s\": %s (%d)\n", keyfile, strerror(errno), errno);
         return 5;
