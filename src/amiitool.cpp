@@ -1,35 +1,57 @@
-#include <iostream>
+#include "logging.hpp"
+#include "amiitool.hpp"
 
-#include <nfc3d/amiibo.h>
-
-#include "logging.h"
-#include "amiitool.h"
-#include "amiibo.h"
-
+#include <QFile>
+#include <QByteArray>
 
 Amiitool::Amiitool(const char *key_file_path) {
+
     if (!nfc3d_amiibo_load_keys(&amiibo_keys, key_file_path)) {
         qFatal("Could not load keys from %s", key_file_path);
     }
 }
 
-void Amiitool::print_hex(const uint8_t *pbtData, size_t szBytes) {
-    size_t szPos;
-    for (szPos = 0; szPos < szBytes; szPos++) {
-        printf("%02x  ", pbtData[szPos]);
+Amiitool::~Amiitool() {
+    amiibo_keys = {};
+    delete[]original_amiibo;
+    delete[]modified_amiibo;
+}
+
+void Amiitool::print_hex(const uint8_t *pbt_data, size_t sz_bytes) {
+    for (int i = 0; i < sz_bytes; i++) {
+        printf("%02x  ", pbt_data[i]);
     }
     printf("\n");
 }
 
-void Amiitool::load_amiibo_data(uint8_t amiibo) {
+void Amiitool::load_amiibo_data(const char *file_path) {
+    QFile amiibo_file(file_path);
+    if (!amiibo_file.open(QIODevice::ReadOnly)) {
+        qFatal("Could not open file: %s", file_path);
+    }
 
+    auto amiibo_file_data = amiibo_file.readAll();
+    amiibo_file.close();
+
+    if (amiibo_file_data.size() < NFC3D_AMIIBO_SIZE) {
+        qFatal("Could not read from input: %s", file_path);
+    }
+    for (int i = 0; i < amiibo_file_data.size(); ++i) {
+        original_amiibo[i] = static_cast<uint8_t>(amiibo_file_data[i]);
+    }
 }
 
-void Amiitool::load_amiibo_data(QString file_path) {
-
+void Amiitool::amiibo_encryption() {
+    nfc3d_amiibo_pack(&amiibo_keys, original_amiibo, modified_amiibo);
 }
 
-void Amiitool::load_amiibo_data(std::string file_path) {
+void Amiitool::amiibo_decryption() {
+    if (!nfc3d_amiibo_unpack(&amiibo_keys, original_amiibo, modified_amiibo)) {
+        qFatal("!!! WARNING !!!: Tag signature was NOT valid");
+    }
+}
 
+uint8_t *Amiitool::get_modified_amiibo_data() {
+    return modified_amiibo;
 }
 

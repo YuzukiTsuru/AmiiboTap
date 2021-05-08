@@ -1,10 +1,10 @@
 #include <nfc/nfc.h>
 
-#include "amiibo_static.h"
-#include "nfchandler.h"
-#include "amiitool.h"
-#include "amiibo.h"
-#include "logging.h"
+#include "amiibo_static.hpp"
+#include "nfchandler.hpp"
+#include "amiitool.hpp"
+#include "amiibo.hpp"
+#include "logging.hpp"
 
 
 const uint8_t dynamic_lock_bytes[4] = {0x01, 0x00, 0x0f, 0xbd};

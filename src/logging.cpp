@@ -3,7 +3,7 @@
 //
 
 #include <QDebug>
-#include "logging.h"
+#include "logging.hpp"
 
 void logging_message(QtMsgType type, const QMessageLogContext &context, const QString &msg) {
     static QMutex mutex;

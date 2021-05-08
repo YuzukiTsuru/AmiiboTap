@@ -1,7 +1,7 @@
 #include <iostream>
 #include <nfc/nfc-types.h>
 
-#include "amiibo_static.h"
+#include "amiibo_static.hpp"
 
 class Amiibo;
 

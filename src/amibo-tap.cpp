@@ -1,7 +1,7 @@
-#include "amiibo.h"
-#include "amiitool.h"
-#include "nfchandler.h"
-#include "logging.h"
+#include "amiibo.hpp"
+#include "amiitool.hpp"
+#include "nfchandler.hpp"
+#include "logging.hpp"
 
 int main(int argc, char **argv) {
     // init log message handler

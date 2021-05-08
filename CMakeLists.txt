@@ -44,9 +44,12 @@ add_executable(${PROJECT_NAME}
         src/amiibo.cpp
         src/nfchandler.cpp
         src/amibo-tap.cpp
-        src/logging.h src/logging.cpp)
-target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} nfc amiibo)
+        src/logging.cpp
+        test/uint8_t.cpp)
+target_link_libraries(${PROJECT_NAME} amiibo ${REQUIRED_LIBS_QUALIFIED} nfc)
 
+add_executable(uint8_t_test test/uint8_t.cpp)
+target_link_libraries(uint8_t_test ${REQUIRED_LIBS_QUALIFIED})
 
 if (WIN32)
     set(DEBUG_SUFFIX)

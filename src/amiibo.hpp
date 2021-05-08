@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdint>
 
-#include "amiibo_static.h"
+#include "amiibo_static.hpp"
 
 class Amiibo {
 public:
