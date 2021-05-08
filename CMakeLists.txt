@@ -37,6 +37,8 @@ if (NOT CMAKE_PREFIX_PATH)
             "(-DCMAKE_PREFIX_PATH=\"path/to/Qt/lib/cmake\" or -DCMAKE_PREFIX_PATH=/usr/include/{host}/qt{version}/ on Ubuntu)")
 endif ()
 
+include_directories(lib/amiitool/amiitool-src/include)
+
 add_executable(${PROJECT_NAME}
         src/amiitool.cpp
         src/amiibo.cpp

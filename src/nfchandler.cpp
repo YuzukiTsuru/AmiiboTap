@@ -17,7 +17,7 @@ const nfc_modulation nmMifare = {
 
 NFCHandler::NFCHandler() {
     qInfo("Initializing NFC adapter");
-
+    // init nfc
     nfc_init(&context);
 
     if (!context) {
