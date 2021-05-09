@@ -11,7 +11,7 @@ public:
 
     void read_tag_UUID(uint8_t *uuidBuffer);
 
-    void write_amiibo(Amiibo *amiibo);
+    void write_amiibo(Amiibo amiibo);
 
 private:
     nfc_target target = {};

@@ -1,5 +1,4 @@
 #include "amiibo.hpp"
-#include "amiitool.hpp"
 #include "nfchandler.hpp"
 #include "logging.hpp"
 
@@ -7,19 +6,20 @@ int main(int argc, char **argv) {
     // init log message handler
     qInstallMessageHandler(logging_message);
 
+    // Para error handler
     if (argc != 3 && argc != 1) {
         qFatal("Incorrect number of arguments\nUsage\n\tamiibo-tap keyfile binfile");
     }
 
-    // TODO: Until Finish UI
-    if (argc == 1) {
-        qFatal("Only support CLI");
+    // CLI or GUI
+    if (argc == 3) {
+        // CLI Usage
+        Amiibo amiibo(argv[1], argv[2]);
+        NFCHandler nfc;
+        nfc.write_amiibo(amiibo);
+        return 0;
+    } else {
+        // GUI Usage
+        // TODO: QT UI
     }
-
-    // Amiitool::setKeyPath(argv[1]);
-
-    auto *amiibo = new Amiibo(argv[2]);
-
-    auto *nfc = new NFCHandler();
-    nfc->write_amiibo(amiibo);
 }

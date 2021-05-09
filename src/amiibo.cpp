@@ -1,51 +1,37 @@
 #include <iostream>
 
 #include "amiibo.hpp"
-#include "amiitool.hpp"
 #include "logging.hpp"
 
 #define UUID_OFFSET 468
 #define PASSWORD_OFFSET 532
 #define PASSWORD_SIZE 4
 
-Amiibo::Amiibo(const char *file_path) {
-    read_file_into_buffer(file_path, encrypted_buffer, AMIIBO_SIZE);
+Amiibo::Amiibo(const char *keyFilePath, const char *file_path) : Amiitool(keyFilePath) {
+    auto data = load_amiibo_data(file_path);
+    amiibo_decryption(data);
+    buffer = get_amiibo_data();
+}
 
-    //Amiitool::shared()->decryptBuffer(encrypted_buffer, buffer);
+Amiibo::~Amiibo() {
+    delete[]buffer;
 }
 
 void Amiibo::set_UUID(const uint8_t *uuid) {
-    printf("\nUpdating bin for new UID:\n");
+    qInfo("Updating bin for new UID:");
 
     // Credit: https://gist.githubusercontent.com/ShoGinn/d27a726296f4370bbff0f9b1a7847b85/raw/aeb425e8b1708e1c61f78c3e861dad03c20ca8ab/Arduino_amiibo_tool.bash
     replace_with_UUID(uuid);
     replace_password(uuid);
     set_defaults(uuid);
-    //Amiitool::shared()->encryptBuffer(encrypted_buffer, buffer);
-
-    printf("Finished updating bin\n\n");
-}
-
-void Amiibo::read_file_into_buffer(const char *file_path, uint8_t *buffer, size_t size) {
-    FILE *file = fopen(file_path, "r");
-
-    if (!file) {
-        fprintf(stderr, "Could not open %s\n", file_path);
-        exit(1);
-    }
-
-    if (size != fread(buffer, 1, size, file)) {
-        fprintf(stderr, "Read incorrect number of bytes from file: %s\n", file_path);
-        exit(1);
-    }
-
-    fclose(file);
+    amiibo_encryption(buffer);
+    qInfo("Finished updating bin");
 }
 
 void Amiibo::replace_with_UUID(const uint8_t *uuid) {
     uint8_t bcc[2];
 
-    printf("Replacing UID\n");
+    qInfo("Replacing UID");
     bcc[0] = 0x88 ^ uuid[0] ^ uuid[1] ^ uuid[2];
     bcc[1] = uuid[3] ^ uuid[4] ^ uuid[5] ^ uuid[6];
 
@@ -64,7 +50,7 @@ void Amiibo::replace_with_UUID(const uint8_t *uuid) {
 void Amiibo::replace_password(const uint8_t *uuid) {
     uint8_t password[PASSWORD_SIZE] = {0, 0, 0, 0};
 
-    printf("Updating password\n");
+    qInfo("Updating password");
     password[0] = 0xAA ^ uuid[1] ^ uuid[3];
     password[1] = 0x55 ^ uuid[2] ^ uuid[4];
     password[2] = 0xAA ^ uuid[3] ^ uuid[5];

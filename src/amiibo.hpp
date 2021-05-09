@@ -1,20 +1,19 @@
 #include <iostream>
 #include <cstdint>
 
+#include "amiitool.hpp"
 #include "amiibo_static.hpp"
 
-class Amiibo {
+class Amiibo : public Amiitool {
 public:
-    explicit Amiibo(const char *file_path);
+    Amiibo(const char *keyFilePath, const char *file_path);
+
+    ~Amiibo();
 
     void set_UUID(const uint8_t *uuid);
 
-    uint8_t encrypted_buffer[AMIIBO_SIZE] = {};
-
 private:
-    uint8_t buffer[AMIIBO_SIZE] = {};
-
-    static void read_file_into_buffer(const char *file_path, uint8_t *buffer, size_t size);
+    uint8_t *buffer = nullptr;
 
     void replace_with_UUID(const uint8_t *uuid);
 

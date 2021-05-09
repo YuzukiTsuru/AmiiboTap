@@ -11,6 +11,7 @@ int main() {
     array[1] = 0xe1;
     array[2] = 0xf2;
     array[3] = 0xeff5;
-    auto a = reinterpret_cast<uint8_t *>( array.data());
-3   qDebug() << a;
+    auto a = reinterpret_cast<uint8_t *>(array.data());
+
+    qDebug() << a;
 }

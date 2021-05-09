@@ -2,7 +2,6 @@
 
 #include "amiibo_static.hpp"
 #include "nfchandler.hpp"
-#include "amiitool.hpp"
 #include "amiibo.hpp"
 #include "logging.hpp"
 
@@ -55,12 +54,12 @@ void NFCHandler::read_tag_UUID(uint8_t uuidBuffer[]) {
     }
 }
 
-void NFCHandler::write_amiibo(Amiibo *amiibo) {
+void NFCHandler::write_amiibo(Amiibo amiibo) {
     uint8_t uuid[UUID_SIZE];
     read_tag_UUID(uuid);
 
-    amiibo->set_UUID(uuid);
-    write_buffer(amiibo->encrypted_buffer);
+    amiibo.set_UUID(uuid);
+    write_buffer(amiibo.get_amiibo_data());
 }
 
 void NFCHandler::write_buffer(const uint8_t *buffer) {
