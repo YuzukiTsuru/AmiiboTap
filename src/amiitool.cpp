@@ -17,9 +17,8 @@ Amiitool::~Amiitool() {
 
 void Amiitool::print_hex(const uint8_t *pbt_data, size_t sz_bytes) {
     for (int i = 0; i < sz_bytes; i++) {
-        printf("%02x  ", pbt_data[i]);
+        qInfo("%02x  ", pbt_data[i]);
     }
-    printf("\n");
 }
 
 uint8_t *Amiitool::load_amiibo_data(const char *file_path) {
