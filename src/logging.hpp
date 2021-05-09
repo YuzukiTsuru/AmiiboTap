@@ -11,14 +11,6 @@
 #include <QTextStream>
 #include <QDateTime>
 
-#if RELEASE
-#ifdef qFatal
-#undef qFatal
-#define qFatal(n) std::cerr << n << std::endl
-#endif
-#endif
-
-
 // logger
 void logging_message(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 

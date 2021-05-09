@@ -1,5 +1,6 @@
 *.bin
 pimiibo
+
 ### C template
 # Prerequisites
 *.d
@@ -264,3 +265,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+/test/AmiiboTap.log
