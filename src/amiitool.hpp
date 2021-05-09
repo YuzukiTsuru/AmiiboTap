@@ -1,3 +1,6 @@
+#ifndef AMIIBOTAP_AMIITOOL_HPP
+#define AMIIBOTAP_AMIITOOL_HPP
+
 #include <iostream>
 
 #ifdef __cplusplus
@@ -34,3 +37,5 @@ private:
     nfc3d_amiibo_keys amiibo_keys = {};
     uint8_t *modified_amiibo = new uint8_t[NFC3D_AMIIBO_SIZE];
 };
+
+#endif //AMIIBOTAP_AMIITOOL_HPP

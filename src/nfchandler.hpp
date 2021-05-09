@@ -1,3 +1,6 @@
+#ifndef AMIIBOTAP_NFCHANDLER_HPP
+#define AMIIBOTAP_NFCHANDLER_HPP
+
 #include <iostream>
 #include <nfc/nfc-types.h>
 
@@ -28,3 +31,5 @@ private:
 
     void write_static_lock_bytes();
 };
+
+#endif //AMIIBOTAP_NFCHANDLER_HPP

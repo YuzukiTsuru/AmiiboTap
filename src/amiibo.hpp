@@ -1,3 +1,6 @@
+#ifndef AMIIBOTAP_AMIIBO_HPP
+#define AMIIBOTAP_AMIIBO_HPP
+
 #include <iostream>
 #include <cstdint>
 
@@ -21,3 +24,5 @@ private:
 
     void set_defaults(const uint8_t *uuid);
 };
+
+#endif //AMIIBOTAP_AMIIBO_HPP
