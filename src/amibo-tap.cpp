@@ -8,6 +8,7 @@ int main(int argc, char **argv) {
 
     // Para error handler
     if (argc != 3 && argc != 1) {
+        q:
         qFatal("Incorrect number of arguments\nUsage\n\tamiibo-tap keyfile binfile");
     }
 
@@ -17,9 +18,10 @@ int main(int argc, char **argv) {
         Amiibo amiibo(argv[1], argv[2]);
         NFCHandler nfc;
         nfc.write_amiibo(amiibo);
-        return 0;
+
     } else {
         // GUI Usage
         // TODO: QT UI
+        goto q;
     }
 }

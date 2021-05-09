@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.19)
 project(AmiiboTap)
 
+if (CMAKE_BUILD_TYPE STREQUAL Release)
+    ADD_DEFINITIONS(-DRELEASE)
+endif ()
+
 # subproject for amiitool
 add_subdirectory(lib/amiitool)
 
@@ -21,7 +25,7 @@ if (CMAKE_HOST_WIN32)
     include_directories(${LIBNFC_INCLUDE_DIRS})
     link_directories(${LIBNFC_LIBRARY_DIRS})
 elseif (CMAKE_HOST_APPLE)
-    find_path(LibNFC_FIND nfc.h "/usr/local/Cellar/libnfc/1.8.0/include/" NO_SYSTEM_ENVIRONMENT_PATH)
+    find_path(LibNFC_FIND nfc.h "/usr/local/Cellar/libnfc/1.8.0/include/nfc" NO_SYSTEM_ENVIRONMENT_PATH)
     if (LibNFC_FIND)
         include_directories(/usr/local/Cellar/libnfc/1.8.0/include)
         link_directories(/usr/local/Cellar/libnfc/1.8.0/lib)
