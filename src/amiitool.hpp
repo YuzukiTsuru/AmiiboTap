@@ -15,8 +15,6 @@ class Amiitool {
 public:
     explicit Amiitool(const char *key_file_path);
 
-    ~Amiitool();
-
     void amiibo_encryption(uint8_t *amiibo);
 
     void amiibo_decryption(uint8_t *amiibo);
@@ -30,8 +28,6 @@ public:
      * @SELF: original_amiibo
      */
     static uint8_t *load_amiibo_data(const char *file_path);
-
-    static void print_hex(const uint8_t *pbt_data, size_t sz_bytes);
 
 private:
     nfc3d_amiibo_keys amiibo_keys = {};

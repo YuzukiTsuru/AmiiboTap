@@ -4,3 +4,6 @@
 [submodule "lib/amiitool/mbedtls"]
 	path = lib/amiitool/mbedtls
 	url = https://github.com/ARMmbed/mbedtls
+[submodule "lib/ColorCout"]
+	path = lib/ColorCout
+	url = https://github.com/YuzukiTsuru/ColorCout

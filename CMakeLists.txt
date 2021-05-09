@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 project(AmiiboTap)
 
 if (CMAKE_BUILD_TYPE STREQUAL Release)
@@ -41,14 +41,16 @@ if (NOT CMAKE_PREFIX_PATH)
             "(-DCMAKE_PREFIX_PATH=\"path/to/Qt/lib/cmake\" or -DCMAKE_PREFIX_PATH=/usr/include/{host}/qt{version}/ on Ubuntu)")
 endif ()
 
-include_directories(lib/amiitool/amiitool-src/include)
+include_directories(
+        lib/amiitool/amiitool-src/include
+        lib/ColorCout/includes
+        )
 
 add_executable(${PROJECT_NAME}
         src/amiitool.cpp
         src/amiibo.cpp
         src/nfchandler.cpp
         src/amibo-tap.cpp
-        src/logging.cpp
         )
 target_link_libraries(${PROJECT_NAME} amiibo ${REQUIRED_LIBS_QUALIFIED} nfc)
 

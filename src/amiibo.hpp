@@ -11,8 +11,6 @@ class Amiibo : public Amiitool {
 public:
     Amiibo(const char *keyFilePath, const char *file_path);
 
-    ~Amiibo();
-
     void set_UUID(const uint8_t *uuid);
 
 private:

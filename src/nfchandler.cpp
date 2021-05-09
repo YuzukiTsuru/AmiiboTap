@@ -1,9 +1,10 @@
 #include <nfc/nfc.h>
 
+#include <ColorCout.hpp>
+
 #include "amiibo_static.hpp"
 #include "nfchandler.hpp"
 #include "amiibo.hpp"
-#include "logging.hpp"
 
 
 const uint8_t dynamic_lock_bytes[4] = {0x01, 0x00, 0x0f, 0xbd};
@@ -15,37 +16,40 @@ const nfc_modulation nmMifare = {
 };
 
 NFCHandler::NFCHandler() {
-    qInfo("Initializing NFC adapter");
+    std::cout << cc::cyan << "Initializing NFC adapter" << cc::reset << std::endl;
     // init nfc
     nfc_init(&context);
 
     if (!context) {
-        qFatal("Unable to init libnfc (malloc)");
+        std::cout << cc::red << "Unable to init libnfc (malloc)" << cc::reset << std::endl;
     }
 
     device = nfc_open(context, nullptr);
 
     if (device == nullptr) {
-        qFatal("Unable to open NFC device.");
+        std::cout << cc::red << "Unable to open NFC device." << cc::reset << std::endl;
     }
 
     if (nfc_initiator_init(device) < 0) {
-        nfc_perror(device, "nfc_initiator_init");
+        std::cout << cc::red << nfc_strerror(device) << cc::reset << std::endl;
     }
 
-    qInfo("NFC Reader: OPENED, DO NOT DISCONNECT");
+    std::cout << cc::green << "NFC Reader: OPENED, DO NOT DISCONNECT" << cc::reset << std::endl;
 }
 
 void NFCHandler::read_tag_UUID(uint8_t uuidBuffer[]) {
-    qInfo("Scaning TAG...");
+    std::cout << cc::cyan << "Scaning TAG..." << cc::reset << std::endl;
 
     if (nfc_initiator_select_passive_target(device, nmMifare, nullptr, 0, &target) > 0) {
-        qInfo("Read UID: ");
         size_t uidSize = target.nti.nai.szUidLen;
-        // Amiitool::shared()->printHex(target.nti.nai.abtUid, uidSize);
+        std::cout << cc::cyan << "Read UID: " << cc::yellow;
+        for (int i = 0; i < uidSize; i++) {
+            std::cout << " " << +target.nti.nai.abtUid[i];
+        }
+        std::cout << cc::reset << std::endl;
 
         if (UUID_SIZE != uidSize) {
-            qFatal("Read wrong size UID");
+            std::cout << cc::red << "Read wrong size UID" << cc::reset << std::endl;
         }
 
         for (int i = 0; i < UUID_SIZE; ++i) {
@@ -63,44 +67,47 @@ void NFCHandler::write_amiibo(Amiibo amiibo) {
 }
 
 void NFCHandler::write_buffer(const uint8_t *buffer) {
-    qInfo("Writing tag...");
+    std::cout << cc::cyan << "Writing tag..." << cc::reset << std::endl;
     write_data_pages(buffer);
     write_dynamic_lock_bytes();
     write_static_lock_bytes();
-    qInfo("Finished writing tag.");
+    std::cout << cc::cyan << "Finished writing tag." << cc::reset << std::endl;
 }
 
 void NFCHandler::write_data_pages(const uint8_t *buffer) {
-    qInfo("Writing encrypted bin...");
+    std::cout << cc::cyan << "Writing encrypted bin..." << cc::reset << std::endl;
     for (uint8_t i = 3; i < PAGE_COUNT; i++) {
         write_page(i, buffer + (i * 4));
     }
-    qInfo("Writing encrypted bin done.");
+    std::cout << cc::cyan << "Writing encrypted bin done." << cc::reset << std::endl;
 }
 
 void NFCHandler::write_dynamic_lock_bytes() {
-    qInfo("Writing dynamic lock bytes...");
+    std::cout << cc::cyan << "Writing dynamic lock bytes..." << cc::reset << std::endl;
     write_page(130, dynamic_lock_bytes);
-    qInfo("Writing dynamic lock bytes done.");
+    std::cout << cc::cyan << "Writing dynamic lock bytes done." << cc::reset << std::endl;
 }
 
 void NFCHandler::write_static_lock_bytes() {
-    qInfo("Writing static lock bytes...");
+    std::cout << cc::cyan << "Writing static lock bytes..." << cc::reset << std::endl;
     write_page(2, static_lock_bytes);
-    qInfo("Writing static lock bytes done.");
+    std::cout << cc::cyan << "Writing static lock bytes done." << cc::reset << std::endl;
 }
 
 void NFCHandler::write_page(uint8_t page, const uint8_t *buffer) {
-    qInfo("Writing to %d: %02x %02x %02x %02x...", page, buffer[0], buffer[1], buffer[2], buffer[3]);
+
+    // +page http://cpp.indi.frih.net/blog/2014/09/tippet-printing-numeric-values-for-chars-and-uint8_t/
+    std::cout << cc::cyan << "Writing to "
+              << cc::magenta << std::hex << +page << cc::reset;
+
+    std::cout << " " << cc::yellow << +buffer[0] << " " << +buffer[1]
+              << " " << +buffer[2] << " " << +buffer[3] << cc::reset << std::endl;
 
     uint8_t sendData[6] = {WRITE_COMMAND, page, buffer[0], buffer[1], buffer[2], buffer[3]};
 
-    int responseCode = nfc_initiator_transceive_bytes(device, sendData, 6, nullptr, 0, 0);
-
-    if (responseCode == 0) {
-        qInfo("All Done.");
+    if (!nfc_initiator_transceive_bytes(device, sendData, 6, nullptr, 0, 0)) {
+        std::cout << cc::green << "done." << cc::reset << std::endl;
     } else {
-        nfc_perror(device, "Write");
-        qFatal("Write tag Failed");
+        std::cout << "Write tag Failed: " << nfc_strerror(device) << cc::reset << std::endl;
     }
 }

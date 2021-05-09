@@ -1,15 +1,20 @@
+#include <iostream>
+
+#include <ColorCout.hpp>
+
 #include "amiibo.hpp"
 #include "nfchandler.hpp"
-#include "logging.hpp"
 
 int main(int argc, char **argv) {
-    // init log message handler
-    qInstallMessageHandler(logging_message);
-
     // Para error handler
     if (argc != 3 && argc != 1) {
         q:
-        qFatal("Incorrect number of arguments\nUsage\n\tamiibo-tap keyfile binfile");
+        std::cout << cc::red
+                  << "Incorrect number of arguments\n"
+                  << "Usage\n"
+                  << "\tamiibo-tap keyfile binfile"
+                  << cc::reset
+                  << std::endl;
     }
 
     // CLI or GUI
@@ -18,7 +23,7 @@ int main(int argc, char **argv) {
         Amiibo amiibo(argv[1], argv[2]);
         NFCHandler nfc;
         nfc.write_amiibo(amiibo);
-
+        return 0;
     } else {
         // GUI Usage
         // TODO: QT UI
