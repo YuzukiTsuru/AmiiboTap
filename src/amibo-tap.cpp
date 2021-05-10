@@ -7,8 +7,7 @@
 
 int main(int argc, char **argv) {
     // Para error handler
-    if (argc != 3 && argc != 1) {
-        q:
+    if (argc != 3) {
         std::cout << cc::red
                   << "Incorrect number of arguments\n"
                   << "Usage\n"
@@ -16,17 +15,8 @@ int main(int argc, char **argv) {
                   << cc::reset
                   << std::endl;
     }
-
-    // CLI or GUI
-    if (argc == 3) {
-        // CLI Usage
-        Amiibo amiibo(argv[1], argv[2]);
-        NFCHandler nfc;
-        nfc.write_amiibo(amiibo);
-        return 0;
-    } else {
-        // GUI Usage
-        // TODO: QT UI
-        goto q;
-    }
+    Amiibo amiibo(argv[1], argv[2]);
+    NFCHandler nfc;
+    nfc.write_amiibo(amiibo);
+    return 0;
 }

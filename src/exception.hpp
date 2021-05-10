@@ -2,8 +2,8 @@
 // Created by Ghost Gloomy on 2021/5/10.
 //
 
-#ifndef AMIIBOTAP_EXCEPTION_H
-#define AMIIBOTAP_EXCEPTION_H
+#ifndef AMIIBOTAP_EXCEPTION_HPP
+#define AMIIBOTAP_EXCEPTION_HPP
 
 #include <stdexcept>
 #include <string>
@@ -19,4 +19,4 @@ public:
             "Read Amiibo bin file: " + what + " fail, wrong size.") {};
 };
 
-#endif //AMIIBOTAP_EXCEPTION_H
+#endif //AMIIBOTAP_EXCEPTION_HPP
