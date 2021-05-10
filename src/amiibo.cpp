@@ -88,3 +88,7 @@ void Amiibo::set_defaults(const uint8_t *uuid) {
     buffer[2] = 0;
     buffer[3] = 0;
 }
+
+Amiibo::~Amiibo() {
+    delete buffer;
+}

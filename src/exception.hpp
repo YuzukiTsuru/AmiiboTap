@@ -19,4 +19,16 @@ public:
             "Read Amiibo bin file: " + what + " fail, wrong size.") {};
 };
 
+class amiibo_write_error : public std::runtime_error {
+public:
+    explicit amiibo_write_error(const std::string &what) : std::runtime_error(
+            "Write Amiibo to TAG error: " + what + ", this TAG may aleady locked! ") {};
+};
+
+class nfc_not_found : public std::runtime_error {
+public:
+    explicit nfc_not_found() : std::runtime_error("Could not open the nfc devices") {};
+};
+
+
 #endif //AMIIBOTAP_EXCEPTION_HPP

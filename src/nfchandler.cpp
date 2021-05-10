@@ -5,6 +5,7 @@
 #include "amiibo_static.hpp"
 #include "nfchandler.hpp"
 #include "amiibo.hpp"
+#include "exception.hpp"
 
 
 const uint8_t dynamic_lock_bytes[4] = {0x01, 0x00, 0x0f, 0xbd};
@@ -30,9 +31,8 @@ NFCHandler::NFCHandler() {
         std::cout << cc::red << "Unable to open NFC device." << cc::reset << std::endl;
     }
 
-    if (nfc_initiator_init(device) < 0) {
-        std::cout << cc::red << nfc_strerror(device) << cc::reset << std::endl;
-    }
+    if (nfc_initiator_init(device) < 0)
+        throw nfc_not_found();
 
     std::cout << cc::green << "NFC Reader: OPENED, DO NOT DISCONNECT" << cc::reset << std::endl;
 }
@@ -108,7 +108,6 @@ void NFCHandler::write_page(uint8_t page, const uint8_t *buffer) {
     if (!nfc_initiator_transceive_bytes(device, sendData, 6, nullptr, 0, 0)) {
         std::cout << cc::green << "done." << cc::reset << std::endl;
     } else {
-        std::cout << cc::red << "Write tag Failed: " << nfc_strerror(device) << cc::reset << std::endl;
-        throw std::runtime_error(nfc_strerror(device));
+        throw amiibo_write_error(nfc_strerror(device));
     }
 }

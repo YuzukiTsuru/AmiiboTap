@@ -15,8 +15,13 @@ int main(int argc, char **argv) {
                   << cc::reset
                   << std::endl;
     }
-    Amiibo amiibo(argv[1], argv[2]);
-    NFCHandler nfc;
-    nfc.write_amiibo(amiibo);
+    try {
+        Amiibo amiibo(argv[1], argv[2]);
+        NFCHandler nfc;
+        nfc.write_amiibo(amiibo);
+    } catch (const std::runtime_error &e) {
+        std::cout << cc::red << e.what() << cc::reset << std::endl;
+        return 0;
+    }
     return 0;
 }
