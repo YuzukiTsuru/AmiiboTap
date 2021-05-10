@@ -108,6 +108,7 @@ void NFCHandler::write_page(uint8_t page, const uint8_t *buffer) {
     if (!nfc_initiator_transceive_bytes(device, sendData, 6, nullptr, 0, 0)) {
         std::cout << cc::green << "done." << cc::reset << std::endl;
     } else {
-        std::cout << "Write tag Failed: " << nfc_strerror(device) << cc::reset << std::endl;
+        std::cout << cc::red << "Write tag Failed: " << nfc_strerror(device) << cc::reset << std::endl;
+        throw std::runtime_error(nfc_strerror(device));
     }
 }

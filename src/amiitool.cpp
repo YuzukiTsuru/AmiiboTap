@@ -1,9 +1,11 @@
-#include <QFile>
-#include <QByteArray>
+#include <fstream>
+#include <vector>
 
 #include <ColorCout.hpp>
 
 #include "amiitool.hpp"
+#include "binarybuffer.h"
+#include "exception.h"
 
 Amiitool::Amiitool(const char *key_file_path) {
     if (!nfc3d_amiibo_load_keys(&amiibo_keys, key_file_path)) {
@@ -12,23 +14,11 @@ Amiitool::Amiitool(const char *key_file_path) {
 }
 
 uint8_t *Amiitool::load_amiibo_data(const char *file_path) {
-    auto *amiibo = new uint8_t[AMIIBO_SIZE];
-
-    QFile amiibo_file(file_path);
-    if (!amiibo_file.open(QIODevice::ReadOnly)) {
-        std::cout << cc::red << "Could not open file: " << file_path << cc::reset << std::endl;
+    binarybuffer buffer(file_path);
+    if (buffer.get_size() < AMIIBO_SIZE) {
+        throw amiibo_file_size_error(file_path);
     }
-
-    auto amiibo_file_data = amiibo_file.readAll();
-    amiibo_file.close();
-
-    if (amiibo_file_data.size() < NFC3D_AMIIBO_SIZE) {
-        std::cout << cc::red << "Could not read from input: %s" << file_path << cc::reset << std::endl;
-    }
-    for (int i = 0; i < amiibo_file_data.size(); ++i) {
-        amiibo[i] = static_cast<uint8_t>(amiibo_file_data[i]);
-    }
-    return amiibo;
+    return buffer.get_data();
 }
 
 void Amiitool::amiibo_encryption(uint8_t *amiibo) {

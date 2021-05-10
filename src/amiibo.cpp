@@ -29,10 +29,14 @@ void Amiibo::set_UUID(const uint8_t *uuid) {
 void Amiibo::replace_with_UUID(const uint8_t *uuid) {
     uint8_t bcc[2];
 
-    std::cout << "Replacing UID" << cc::reset << std::endl;
-
     bcc[0] = 0x88 ^ uuid[0] ^ uuid[1] ^ uuid[2];
     bcc[1] = uuid[3] ^ uuid[4] ^ uuid[5] ^ uuid[6];
+
+    std::cout << cc::cyan << "Replacing UID:" << cc::reset;
+    for (auto i :bcc) {
+        std::cout << cc::yellow << " " << +i;
+    }
+    std::cout << cc::reset << std::endl;
 
     int i = 0;
     for (; i < 3; i++) {

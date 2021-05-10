@@ -2,6 +2,7 @@
 #define AMIIBOTAP_NFCHANDLER_HPP
 
 #include <iostream>
+#include <exception>
 #include <nfc/nfc-types.h>
 
 #include "amiibo_static.hpp"
