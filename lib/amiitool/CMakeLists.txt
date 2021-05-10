@@ -18,7 +18,7 @@ if (MSVC)
     target_compile_options(amiibo PRIVATE "/wd4996")
 endif (MSVC)
 
-target_link_libraries(amiibo mbedtls)
+target_link_libraries(amiibo mbedcrypto)
 
 add_executable(amiitool amiitool.c)
 target_link_libraries(amiitool amiibo)
