@@ -98,7 +98,7 @@ void NFCHandler::write_page(uint8_t page, const uint8_t *buffer) {
 
     // +page http://cpp.indi.frih.net/blog/2014/09/tippet-printing-numeric-values-for-chars-and-uint8_t/
     std::cout << cc::cyan << "Writing to "
-              << cc::magenta << std::hex << +page << cc::reset;
+              << cc::magenta << +page << cc::reset;
 
     std::cout << " " << cc::yellow << +buffer[0] << " " << +buffer[1]
               << " " << +buffer[2] << " " << +buffer[3] << cc::reset << std::endl;
