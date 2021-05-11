@@ -21,6 +21,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Checkout submodule
+      # You may pin to the exact commit or the version.
+      # uses: Mushus/checkout-submodule@f6a7fddc9798c8f8728b252594243ced3b56e550
+      uses: Mushus/checkout-submodule@v1.0.1
+    
     - name: Download library
       run: sudo apt install libnfc-dev
 
