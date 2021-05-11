@@ -63,3 +63,9 @@ Once you see `Scan TAG`, place and hold your blank NFC tag on the reader/writer.
   This means your tag is already locked. The NTAG 21x spec declares locking bits which permanently prevent certain parts of a tag from being written to once they are set. Therefore once the locking bits are set, you cannot rewrite this tag to another amiibo. All amiibo are required to have certain locking bits sets, so you cannot change a tag once you've used it.
 
     If this happened anywhere other than page 4, it probably means that your device lost connection to the tag. Try again while keeping the tag closer to your device. In most cases such errors will not cause the card to be locked.
+
+## Reference
+- http://nfc-tools.org/index.php/Libnfc
+- http://nfc-tools.org/index.php/ISO14443A
+- https://github.com/Normola/pimiibo
+- https://github.com/socram8888/amiitool
