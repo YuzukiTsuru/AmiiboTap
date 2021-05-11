@@ -22,7 +22,10 @@ AmiiboTap is a tool for clone amiibo NFC tags using PN532 NFC reader/writer with
 3. Compile sources. 
 
     ```
-    mkdir build && cd build && cmake .. && make
+    mkdir build
+    cd build
+    cmake -DENABLE_TESTING=Off -DCMAKE_BUILD_TYPE=Release  ..
+    make AmiiboTapCLI
     ```
 
 ## Getting the required files
