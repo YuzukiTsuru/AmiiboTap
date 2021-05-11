@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
                   << "\tamiibo-tap keyfile binfile"
                   << cc::reset
                   << std::endl;
+        return 0;
     }
     try {
         Amiibo amiibo(argv[1], argv[2]);

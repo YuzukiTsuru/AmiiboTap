@@ -10,7 +10,8 @@ endif ()
 # subproject for amiitool
 add_subdirectory(lib/amiitool)
 
-set(CMAKE_CXX_STANDARD 17)
+# to appease baby msvc, change to stand 20
+set(CMAKE_CXX_STANDARD 20)
 
 if (CMAKE_HOST_WIN32)
     find_package(libnfc)
@@ -43,6 +44,7 @@ add_library(${PROJECT_NAME}
         src/exception.hpp
         src/amiibo_static.hpp
         )
+
 target_link_libraries(${PROJECT_NAME} amiibo nfc)
 
 add_executable(${PROJECT_NAME}CLI src/amibo-tap.cpp)
