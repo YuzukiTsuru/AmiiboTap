@@ -1,5 +1,5 @@
-#ifndef AMIIBOTAP_AMIITOOL_HPP
-#define AMIIBOTAP_AMIITOOL_HPP
+#ifndef AMIIBOTAP_AMIITOOL_H
+#define AMIIBOTAP_AMIITOOL_H
 
 #include <iostream>
 
@@ -9,7 +9,7 @@ extern "C" {
 }
 #endif
 
-#include "amiibo_static.hpp"
+#include "amiibo_static.h"
 
 class Amiitool {
 public:
@@ -34,4 +34,4 @@ private:
     uint8_t *modified_amiibo = new uint8_t[NFC3D_AMIIBO_SIZE];
 };
 
-#endif //AMIIBOTAP_AMIITOOL_HPP
+#endif //AMIIBOTAP_AMIITOOL_H

@@ -2,8 +2,8 @@
 
 #include <ColorCout.hpp>
 
-#include "amiibo.hpp"
-#include "nfchandler.hpp"
+#include "amiibo.h"
+#include "nfchandler.h"
 
 int main(int argc, char **argv) {
     // Para error handler
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
         nfc.write_amiibo(amiibo);
     } catch (const std::runtime_error &e) {
         std::cout << cc::red << e.what() << cc::reset << std::endl;
-        return 0;
+        return -1;
     }
     return 0;
 }

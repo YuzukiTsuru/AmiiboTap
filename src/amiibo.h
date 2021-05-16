@@ -1,11 +1,11 @@
-#ifndef AMIIBOTAP_AMIIBO_HPP
-#define AMIIBOTAP_AMIIBO_HPP
+#ifndef AMIIBOTAP_AMIIBO_H
+#define AMIIBOTAP_AMIIBO_H
 
 #include <iostream>
 #include <cstdint>
 
-#include "amiitool.hpp"
-#include "amiibo_static.hpp"
+#include "amiitool.h"
+#include "amiibo_static.h"
 
 class Amiibo : public Amiitool {
 public:
@@ -25,4 +25,4 @@ private:
     void set_defaults(const uint8_t *uuid);
 };
 
-#endif //AMIIBOTAP_AMIIBO_HPP
+#endif //AMIIBOTAP_AMIIBO_H

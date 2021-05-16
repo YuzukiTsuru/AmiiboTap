@@ -4,7 +4,7 @@
 
 #include "binarybuffer.h"
 
-#include "exception.hpp"
+#include "exception.h"
 
 binarybuffer::binarybuffer(const std::string &file) {
     amiibo.open(file, std::ios::binary);

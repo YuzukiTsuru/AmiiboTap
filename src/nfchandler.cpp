@@ -2,19 +2,11 @@
 
 #include <ColorCout.hpp>
 
-#include "amiibo_static.hpp"
-#include "nfchandler.hpp"
-#include "amiibo.hpp"
-#include "exception.hpp"
+#include "amiibo_static.h"
+#include "nfchandler.h"
+#include "amiibo.h"
+#include "exception.h"
 
-
-const uint8_t dynamic_lock_bytes[4] = {0x01, 0x00, 0x0f, 0xbd};
-const uint8_t static_lock_bytes[4] = {0x00, 0x00, 0x0f, 0xe0};
-
-const nfc_modulation nmMifare = {
-        .nmt = NMT_ISO14443A,
-        .nbr = NBR_106,
-};
 
 NFCHandler::NFCHandler() {
     std::cout << cc::cyan << "Initializing NFC adapter" << cc::reset << std::endl;

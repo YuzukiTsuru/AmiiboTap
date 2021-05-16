@@ -3,9 +3,9 @@
 
 #include <ColorCout.hpp>
 
-#include "amiitool.hpp"
+#include "amiitool.h"
 #include "binarybuffer.h"
-#include "exception.hpp"
+#include "exception.h"
 
 Amiitool::Amiitool(const char *key_file_path) {
     if (!nfc3d_amiibo_load_keys(&amiibo_keys, key_file_path)) {

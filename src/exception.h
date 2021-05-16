@@ -2,8 +2,8 @@
 // Created by Ghost Gloomy on 2021/5/10.
 //
 
-#ifndef AMIIBOTAP_EXCEPTION_HPP
-#define AMIIBOTAP_EXCEPTION_HPP
+#ifndef AMIIBOTAP_EXCEPTION_H
+#define AMIIBOTAP_EXCEPTION_H
 
 #include <stdexcept>
 #include <string>
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif //AMIIBOTAP_EXCEPTION_HPP
+#endif //AMIIBOTAP_EXCEPTION_H

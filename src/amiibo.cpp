@@ -2,7 +2,7 @@
 
 #include <ColorCout.hpp>
 
-#include "amiibo.hpp"
+#include "amiibo.h"
 
 #define UUID_OFFSET 468
 #define PASSWORD_OFFSET 532

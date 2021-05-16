@@ -41,8 +41,8 @@ add_library(${PROJECT_NAME}
         src/amiibo.cpp
         src/nfchandler.cpp
         src/binarybuffer.cpp
-        src/exception.hpp
-        src/amiibo_static.hpp
+        src/exception.h
+        src/amiibo_static.h
         )
 
 target_link_libraries(${PROJECT_NAME} amiibo nfc)
@@ -66,7 +66,12 @@ if (QT)
                 "(-DCMAKE_PREFIX_PATH=\"path/to/Qt/lib/cmake\" or -DCMAKE_PREFIX_PATH=/usr/include/{host}/qt{version}/ on Ubuntu)")
     endif ()
 
-    add_executable(${PROJECT_NAME}GUI src/amibo-tap-qt.cpp)
+    add_executable(${PROJECT_NAME}GUI
+            src/QApp/amibo-tap-qt.cpp
+            src/QApp/mainwindow.cpp
+            src/QApp/mainwindow.h
+            src/QApp/mainwindow.ui
+            )
     target_link_libraries(${PROJECT_NAME}GUI ${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})
 
     if (WIN32)
