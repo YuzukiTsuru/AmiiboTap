@@ -6,45 +6,83 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>355</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>AmiiboTap</string>
   </property>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>54</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Amiibo</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Key</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
+      <width>681</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="centerOnScroll">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>604</width>
-     <height>22</height>
+     <width>800</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="action_close"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>关于</string>
     </property>
-    <addaction name="action_about"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
   </widget>
-  <action name="action_close">
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action3sas">
    <property name="text">
-    <string>关闭</string>
-   </property>
-  </action>
-  <action name="action_about">
-   <property name="text">
-    <string>关于</string>
+    <string>3sas</string>
    </property>
   </action>
  </widget>
