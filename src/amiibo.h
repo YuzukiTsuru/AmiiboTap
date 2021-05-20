@@ -14,16 +14,16 @@ public:
 
     ~Amiibo();
 
-    void set_UUID(const uint8_t *uuid);
+    void set_UUID(const AMIIBIN *uuid);
 
 private:
-    uint8_t *buffer = nullptr;
+    AMIIBIN *buffer = nullptr;
 
-    void replace_with_UUID(const uint8_t *uuid);
+    void replace_with_UUID(const AMIIBIN *uuid);
 
-    void replace_password(const uint8_t *uuid);
+    void replace_password(const AMIIBIN *uuid);
 
-    void set_defaults(const uint8_t *uuid);
+    void set_defaults(const AMIIBIN *uuid);
 };
 
 #endif //AMIIBOTAP_AMIIBO_H
