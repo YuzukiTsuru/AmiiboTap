@@ -6,6 +6,9 @@ AmiiboTap is a tool for clone amiibo NFC tags using PN532 NFC reader/writer with
 
 > This project is for learning and testing purposes only, This project is not responsible for any infringement behavior.
 
+## Help Wanted
+I am trying to get libnfc as a submodule in git and cmake to build, but I cann't get it corrected.
+
 ## Build from source 
 
 ### Linux
