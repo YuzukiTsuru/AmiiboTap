@@ -4,10 +4,6 @@
 
 #include "amiibo.h"
 
-#define UUID_OFFSET 468
-#define PASSWORD_OFFSET 532
-#define PASSWORD_SIZE 4
-
 Amiibo::Amiibo(const char *keyFilePath, const char *file_path) : Amiitool(keyFilePath) {
     auto data = load_amiibo_data(file_path);
     amiibo_decryption(data);

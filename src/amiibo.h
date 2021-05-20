@@ -7,6 +7,7 @@
 #include "amiitool.h"
 #include "amiibo_static.h"
 
+
 class Amiibo : public Amiitool {
 public:
     Amiibo(const char *keyFilePath, const char *file_path);

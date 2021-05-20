@@ -15,16 +15,17 @@ NFCHandler::NFCHandler() {
 
     if (!context) {
         std::cout << cc::red << "Unable to init libnfc (malloc)" << cc::reset << std::endl;
+        throw nfc_init_fault();
     }
 
     device = nfc_open(context, nullptr);
 
     if (device == nullptr) {
         std::cout << cc::red << "Unable to open NFC device." << cc::reset << std::endl;
+        throw nfc_not_found();
     }
 
-    if (nfc_initiator_init(device) < 0)
-        throw nfc_not_found();
+    nfc_initiator_init(device);
 
     std::cout << cc::green << "NFC Reader: OPENED, DO NOT DISCONNECT" << cc::reset << std::endl;
 }

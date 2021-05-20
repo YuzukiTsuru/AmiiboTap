@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
         std::cout << cc::red
                   << "Incorrect number of arguments\n"
                   << "Usage\n"
-                  << "\tamiibo-tap keyfile binfile"
+                  << "\tamiibotapcli keyfile binfile"
                   << cc::reset
                   << std::endl;
         return 0;

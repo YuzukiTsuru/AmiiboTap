@@ -30,5 +30,9 @@ public:
     explicit nfc_not_found() : std::runtime_error("Could not open the nfc devices") {};
 };
 
+class nfc_init_fault : public std::runtime_error {
+public:
+    explicit nfc_init_fault() : std::runtime_error("Could not init NFC library (malloc)") {};
+};
 
 #endif //AMIIBOTAP_EXCEPTION_H
