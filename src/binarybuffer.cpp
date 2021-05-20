@@ -7,7 +7,7 @@
 #include "exception.h"
 
 binarybuffer::binarybuffer(const std::string &file) {
-    amiibo.open(file, std::ios::binary);
+    amiibo.open(file, std::ios::in | std::ios::binary);
     if (!amiibo.is_open()) {
         throw file_open_error(file);
     }
