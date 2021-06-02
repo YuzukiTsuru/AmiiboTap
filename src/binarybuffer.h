@@ -10,16 +10,18 @@
 #include <fstream>
 #include <vector>
 
+#include "amiibo_static.h"
+
 class binarybuffer {
 public:
     explicit binarybuffer(const std::string &file);
 
     [[nodiscard]] std::size_t get_size() const;
 
-    [[nodiscard]] uint8_t *get_data();
+    [[nodiscard]] AMIIBIN *get_data();
 
 private:
-    std::vector<uint8_t> buff;
+    std::vector<AMIIBIN> buff;
     std::basic_ifstream<char> amiibo;
 };
 

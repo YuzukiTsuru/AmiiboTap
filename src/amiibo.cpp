@@ -4,17 +4,13 @@
 
 #include "amiibo.h"
 
-#define UUID_OFFSET 468
-#define PASSWORD_OFFSET 532
-#define PASSWORD_SIZE 4
-
 Amiibo::Amiibo(const char *keyFilePath, const char *file_path) : Amiitool(keyFilePath) {
     auto data = load_amiibo_data(file_path);
     amiibo_decryption(data);
     buffer = get_amiibo_data();
 }
 
-void Amiibo::set_UUID(const uint8_t *uuid) {
+void Amiibo::set_UUID(const AMIIBIN *uuid) {
     std::cout << cc::cyan << "Updating bin for new UID:" << cc::reset << std::endl;
 
     // Credit: https://gist.githubusercontent.com/ShoGinn/d27a726296f4370bbff0f9b1a7847b85/raw/aeb425e8b1708e1c61f78c3e861dad03c20ca8ab/Arduino_amiibo_tool.bash
@@ -26,8 +22,8 @@ void Amiibo::set_UUID(const uint8_t *uuid) {
     std::cout << cc::cyan << "Finished updating bin" << cc::reset << std::endl;
 }
 
-void Amiibo::replace_with_UUID(const uint8_t *uuid) {
-    uint8_t bcc[2];
+void Amiibo::replace_with_UUID(const AMIIBIN *uuid) {
+    AMIIBIN bcc[2];
 
     bcc[0] = 0x88 ^ uuid[0] ^ uuid[1] ^ uuid[2];
     bcc[1] = uuid[3] ^ uuid[4] ^ uuid[5] ^ uuid[6];
@@ -50,8 +46,8 @@ void Amiibo::replace_with_UUID(const uint8_t *uuid) {
     }
 }
 
-void Amiibo::replace_password(const uint8_t *uuid) {
-    uint8_t password[PASSWORD_SIZE] = {0, 0, 0, 0};
+void Amiibo::replace_password(const AMIIBIN *uuid) {
+    AMIIBIN password[PASSWORD_SIZE] = {0, 0, 0, 0};
 
     std::cout << cc::cyan << "Updating password" << cc::reset;
 
@@ -71,7 +67,7 @@ void Amiibo::replace_password(const uint8_t *uuid) {
     }
 }
 
-void Amiibo::set_defaults(const uint8_t *uuid) {
+void Amiibo::set_defaults(const AMIIBIN *uuid) {
     std::cout << cc::cyan << "Writing magic bytes" << cc::reset << std::endl;
 
     // Same as bcc[1]

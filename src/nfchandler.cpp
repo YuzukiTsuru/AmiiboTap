@@ -15,21 +15,22 @@ NFCHandler::NFCHandler() {
 
     if (!context) {
         std::cout << cc::red << "Unable to init libnfc (malloc)" << cc::reset << std::endl;
+        throw nfc_init_fault();
     }
 
     device = nfc_open(context, nullptr);
 
     if (device == nullptr) {
         std::cout << cc::red << "Unable to open NFC device." << cc::reset << std::endl;
+        throw nfc_not_found();
     }
 
-    if (nfc_initiator_init(device) < 0)
-        throw nfc_not_found();
+    nfc_initiator_init(device);
 
     std::cout << cc::green << "NFC Reader: OPENED, DO NOT DISCONNECT" << cc::reset << std::endl;
 }
 
-void NFCHandler::read_tag_UUID(uint8_t uuidBuffer[]) {
+void NFCHandler::read_tag_UUID(AMIIBIN uuidBuffer[]) {
     std::cout << cc::cyan << "Scaning TAG..." << cc::reset << std::endl;
 
     if (nfc_initiator_select_passive_target(device, nmMifare, nullptr, 0, &target) > 0) {
@@ -51,14 +52,14 @@ void NFCHandler::read_tag_UUID(uint8_t uuidBuffer[]) {
 }
 
 void NFCHandler::write_amiibo(Amiibo amiibo) {
-    uint8_t uuid[UUID_SIZE];
+    AMIIBIN uuid[UUID_SIZE];
     read_tag_UUID(uuid);
 
     amiibo.set_UUID(uuid);
     write_buffer(amiibo.get_amiibo_data());
 }
 
-void NFCHandler::write_buffer(const uint8_t *buffer) {
+void NFCHandler::write_buffer(const AMIIBIN *buffer) {
     std::cout << cc::cyan << "Writing tag..." << cc::reset << std::endl;
     write_data_pages(buffer);
     write_dynamic_lock_bytes();
@@ -66,9 +67,9 @@ void NFCHandler::write_buffer(const uint8_t *buffer) {
     std::cout << cc::cyan << "Finished writing tag." << cc::reset << std::endl;
 }
 
-void NFCHandler::write_data_pages(const uint8_t *buffer) {
+void NFCHandler::write_data_pages(const AMIIBIN *buffer) {
     std::cout << cc::cyan << "Writing encrypted bin..." << cc::reset << std::endl;
-    for (uint8_t i = 3; i < PAGE_COUNT; i++) {
+    for (AMIIBIN i = 3; i < PAGE_COUNT; i++) {
         write_page(i, buffer + (i * 4));
     }
     std::cout << cc::cyan << "Writing encrypted bin done." << cc::reset << std::endl;
@@ -86,16 +87,16 @@ void NFCHandler::write_static_lock_bytes() {
     std::cout << cc::cyan << "Writing static lock bytes done." << cc::reset << std::endl;
 }
 
-void NFCHandler::write_page(uint8_t page, const uint8_t *buffer) {
+void NFCHandler::write_page(AMIIBIN page, const AMIIBIN *buffer) {
 
-    // +page http://cpp.indi.frih.net/blog/2014/09/tippet-printing-numeric-values-for-chars-and-uint8_t/
+    // +page http://cpp.indi.frih.net/blog/2014/09/tippet-printing-numeric-values-for-chars-and-AMIIBIN/
     std::cout << cc::cyan << "Writing to "
               << cc::magenta << +page << cc::reset;
 
     std::cout << " " << cc::yellow << +buffer[0] << " " << +buffer[1]
               << " " << +buffer[2] << " " << +buffer[3] << cc::reset << std::endl;
 
-    uint8_t sendData[6] = {WRITE_COMMAND, page, buffer[0], buffer[1], buffer[2], buffer[3]};
+    AMIIBIN sendData[6] = {WRITE_COMMAND, page, buffer[0], buffer[1], buffer[2], buffer[3]};
 
     if (!nfc_initiator_transceive_bytes(device, sendData, 6, nullptr, 0, 0)) {
         std::cout << cc::green << "done." << cc::reset << std::endl;
