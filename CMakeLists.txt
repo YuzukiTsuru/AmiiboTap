@@ -45,7 +45,7 @@ add_library(${PROJECT_NAME}
         src/amiibo_static.h
         )
 
-target_link_libraries(${PROJECT_NAME} amiibo libnfc)
+target_link_libraries(${PROJECT_NAME} amiibo nfc)
 
 add_executable(${PROJECT_NAME}CLI src/amibo-tap.cpp)
 target_link_libraries(${PROJECT_NAME}CLI ${PROJECT_NAME})
