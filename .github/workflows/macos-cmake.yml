@@ -16,9 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Get submodule
-      run: cd ${{github.workspace}} && git submodule init && git submodule update
       
     - name: Download library
       run: brew install libnfc
