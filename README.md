@@ -32,6 +32,31 @@ I am trying to get libnfc as a submodule in git and cmake to build, but I cann't
     cmake -DENABLE_TESTING=Off -DCMAKE_BUILD_TYPE=Release  ..
     make AmiiboTapCLI
     ```
+ 
+### macOS
+1. Clone this repository with submodules:
+
+    ```
+    git clone --recurse-submodules https://github.com/YuzukiTsuru/AmiiboTap.git
+    ```
+
+2. Install `libnfc`, `cmake` using homebrew:
+
+    ```
+    brew install libnfc cmake
+    ```
+
+3. Compile sources. 
+
+    ```
+    mkdir build
+    cd build
+    cmake -DENABLE_TESTING=Off -DCMAKE_BUILD_TYPE=Release  ..
+    make AmiiboTapCLI
+    ```
+
+### Windows
+**Not Fully Supported Yet**
 
 ## Getting the required files
 > **We do not provide downloads of related files**
