@@ -1,6 +1,7 @@
 # AmiiboTap
 
-[![CMake](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/cmake.yml/badge.svg)](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/cmake.yml) 
+[![Linux CMake](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/linux-cmake.yml/badge.svg)](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/linux-cmake.yml)
+[![macOS CMake](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/macos-cmake.yml/badge.svg)](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/macos-cmake.yml)
 
 AmiiboTap is a tool for clone amiibo NFC tags using PN532 NFC reader/writer with [libnfc](http://nfc-tools.org/index.php/Libnfc). 
 
