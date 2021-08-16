@@ -32,4 +32,7 @@ jobs:
       # Build your program with the given configuration
       
       run: cd ${{github.workspace}}/build && make AmiiboTapCLI
+
+    - name: Test
+      run: ./AmiiboTapCLI
       

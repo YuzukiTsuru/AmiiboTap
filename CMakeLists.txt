@@ -25,7 +25,7 @@ elseif (CMAKE_HOST_APPLE)
         message(FATAL_ERROR "LibNFC not found, please use 'brew install libnfc' or macport to download this required library.")
     endif ()
 else ()
-    message("Use system libnfc")
+    include_directories(lib/libnfc/nfc/include/)
 endif ()
 
 
@@ -46,7 +46,7 @@ add_library(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} nfc amiibo)
 
 add_executable(${PROJECT_NAME}CLI src/amibo-tap.cpp)
-target_link_libraries(${PROJECT_NAME}CLI ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}CLI ${PROJECT_NAME} nfc)
 
 if (QT)
     set(CMAKE_AUTOMOC ON)
