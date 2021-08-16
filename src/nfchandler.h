@@ -3,11 +3,19 @@
 
 #include <iostream>
 #include <exception>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <nfc/nfc-types.h>
+#include <nfc/nfc.h>
+#ifdef __cplusplus
+}
+#endif
 
 #include "amiibo_static.h"
-
-class Amiibo;
+#include "amiibo.h"
+#include "exception.h"
 
 class NFCHandler {
 public:

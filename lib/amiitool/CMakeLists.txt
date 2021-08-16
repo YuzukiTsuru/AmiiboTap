@@ -6,6 +6,9 @@ include_directories(
         amiitool-src/include
 )
 
+set(ENABLE_PROGRAMS OFF CACHE BOOL "" FORCE)
+set(ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+
 add_subdirectory(mbedtls)
 
 add_library(amiibo

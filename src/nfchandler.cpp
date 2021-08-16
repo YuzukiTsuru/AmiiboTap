@@ -1,12 +1,6 @@
-#include <nfc/nfc.h>
-
 #include <ColorCout.hpp>
 
-#include "amiibo_static.h"
 #include "nfchandler.h"
-#include "amiibo.h"
-#include "exception.h"
-
 
 NFCHandler::NFCHandler() {
     std::cout << cc::cyan << "Initializing NFC adapter" << cc::reset << std::endl;

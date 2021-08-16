@@ -15,22 +15,17 @@ add_subdirectory(lib/libnfc)
 set(CMAKE_CXX_STANDARD 20)
 
 if (CMAKE_HOST_WIN32)
-    add_definitions(${LIBNFC_DEFINITIONS})
-    include_directories(${LIBNFC_INCLUDE_DIRS})
-    link_directories(${LIBNFC_LIBRARY_DIRS})
-    set(NFCLIBRARY "nfc")
+    include_directories(lib/libnfc/nfc/include/)
 elseif (CMAKE_HOST_APPLE)
     find_path(LibNFC_FIND nfc.h "/usr/local/Cellar/libnfc/1.8.0/include/nfc" NO_SYSTEM_ENVIRONMENT_PATH)
     if (LibNFC_FIND)
         include_directories(/usr/local/Cellar/libnfc/1.8.0/include)
         link_directories(/usr/local/Cellar/libnfc/1.8.0/lib)
-        set(NFCLIBRARY "nfc")
     else ()
         message(FATAL_ERROR "LibNFC not found, please use 'brew install libnfc' or macport to download this required library.")
     endif ()
 else ()
     message("Use system libnfc")
-    set(NFCLIBRARY "nfc")
 endif ()
 
 
@@ -48,7 +43,7 @@ add_library(${PROJECT_NAME}
         src/amiibo_static.h
         )
 
-target_link_libraries(${PROJECT_NAME} amiibo ${NFCLIBRARY})
+target_link_libraries(${PROJECT_NAME} nfc amiibo)
 
 add_executable(${PROJECT_NAME}CLI src/amibo-tap.cpp)
 target_link_libraries(${PROJECT_NAME}CLI ${PROJECT_NAME})
