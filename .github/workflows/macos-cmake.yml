@@ -34,5 +34,5 @@ jobs:
       run: cd ${{github.workspace}}/build && make AmiiboTapCLI
 
     - name: Test
-      run: ./AmiiboTapCLI
+      run: cd ${{github.workspace}}/build && ./AmiiboTapCLI
       
