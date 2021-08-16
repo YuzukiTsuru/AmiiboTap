@@ -1,6 +1,6 @@
 # AmiiboTap
 
-[![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
 
 [![Linux CMake](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/linux-cmake.yml/badge.svg)](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/linux-cmake.yml)
 [![macOS CMake](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/macos-cmake.yml/badge.svg)](https://github.com/YuzukiTsuru/AmiiboTap/actions/workflows/macos-cmake.yml)
@@ -10,7 +10,7 @@ AmiiboTap is a tool for clone amiibo NFC tags using PN532 NFC reader/writer with
 > This project is for learning and testing purposes only, This project is not responsible for any infringement behavior.
 
 ## 👀 Help Wanted
-I am trying to get libnfc as a submodule in git and cmake to build, but I cann't get it corrected.
+I am trying to get libnfc as a submodule in git and cmake to build, but I can't get it corrected.
 
 ## Build from source 
 
