@@ -7,3 +7,6 @@
 [submodule "lib/ColorCout"]
 	path = lib/ColorCout
 	url = https://github.com/YuzukiTsuru/ColorCout
+[submodule "lib/libnfc/nfc"]
+	path = lib/libnfc/nfc
+	url = https://github.com/nfc-tools/libnfc

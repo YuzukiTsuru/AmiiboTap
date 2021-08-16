@@ -9,12 +9,13 @@ endif ()
 
 # subproject for amiitool
 add_subdirectory(lib/amiitool)
+add_subdirectory(lib/libnfc)
 
 # to appease baby msvc, change to stand 20
 set(CMAKE_CXX_STANDARD 20)
 
 if (CMAKE_HOST_WIN32)
-    find_package(libnfc)
+
     add_definitions(${LIBNFC_DEFINITIONS})
     include_directories(${LIBNFC_INCLUDE_DIRS})
     link_directories(${LIBNFC_LIBRARY_DIRS})
