@@ -15,7 +15,6 @@ add_subdirectory(lib/libnfc)
 set(CMAKE_CXX_STANDARD 20)
 
 if (CMAKE_HOST_WIN32)
-
     add_definitions(${LIBNFC_DEFINITIONS})
     include_directories(${LIBNFC_INCLUDE_DIRS})
     link_directories(${LIBNFC_LIBRARY_DIRS})
