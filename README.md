@@ -100,6 +100,14 @@ Once you see `Scan TAG`, place and hold your blank NFC tag on the reader/writer.
 
     If this happened anywhere other than page 4, it probably means that your device lost connection to the tag. Try again while keeping the tag closer to your device. In most cases such errors will not cause the card to be locked.
 
+## ERRORS
+
+NEED FOR HELP
+
+```
+free(): double free detected in tcache 2
+```
+
 ## Reference
 - http://nfc-tools.org/index.php/Libnfc
 - http://nfc-tools.org/index.php/ISO14443A
