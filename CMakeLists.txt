@@ -12,7 +12,7 @@ add_subdirectory(lib/amiitool)
 add_subdirectory(lib/libnfc)
 
 # to appease baby msvc, change to stand 20
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 if (CMAKE_HOST_WIN32)
     include_directories(lib/libnfc/nfc/include/)
